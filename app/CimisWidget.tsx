@@ -17,42 +17,12 @@ class CimisWidget extends Widget {
   }
 
   //----------------------------------
-  //  firstName
+  //  define class properties here
   //----------------------------------
 
-  @property()
-  firstName: string = "John";
-
-  //----------------------------------
-  //  lastName
-  //----------------------------------
-
-  @property()
-  lastName: string = "Smith";
-
-  //----------------------------------
-  //  emphasized
-  //----------------------------------
-
-  @property()
-  emphasized: boolean = false;
-
-  //----------------------------------
-  //  messages
-  //----------------------------------
-
-  @property()
-  @messageBundle("HelloWorld/assets/t9n/widget")
-  messages: { greeting: any; } = null;
-
- 
 // Public method
 render() {
   
-  // const form = this._renderForm();
-  const classes = {
-    [CSS.emphasis]: this.emphasized
-  };
   
     return (
     <div id="form">

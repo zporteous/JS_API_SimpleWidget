@@ -8,32 +8,13 @@ define(["require", "exports", "tslib", "esri/core/accessorSupport/decorators", "
     var CimisWidget = /** @class */ (function (_super) {
         (0, tslib_1.__extends)(CimisWidget, _super);
         function CimisWidget(params) {
-            var _this = _super.call(this, params) || this;
-            //----------------------------------
-            //  firstName
-            //----------------------------------
-            _this.firstName = "John";
-            //----------------------------------
-            //  lastName
-            //----------------------------------
-            _this.lastName = "Smith";
-            //----------------------------------
-            //  emphasized
-            //----------------------------------
-            _this.emphasized = false;
-            //----------------------------------
-            //  messages
-            //----------------------------------
-            _this.messages = null;
-            return _this;
+            return _super.call(this, params) || this;
         }
+        //----------------------------------
+        //  define class properties here
+        //----------------------------------
         // Public method
         CimisWidget.prototype.render = function () {
-            var _a;
-            // const form = this._renderForm();
-            var classes = (_a = {},
-                _a[CSS.emphasis] = this.emphasized,
-                _a);
             return ((0, widget_1.tsx)("div", { id: "form" },
                 (0, widget_1.tsx)("form", null,
                     (0, widget_1.tsx)("div", { class: "form-group" },
@@ -48,19 +29,6 @@ define(["require", "exports", "tslib", "esri/core/accessorSupport/decorators", "
                         (0, widget_1.tsx)("label", { class: "form-check-label", for: "exampleCheck1" }, "Check me out")),
                     (0, widget_1.tsx)("button", { type: "submit", class: "btn btn-primary" }, "Submit"))));
         };
-        (0, tslib_1.__decorate)([
-            (0, decorators_1.property)()
-        ], CimisWidget.prototype, "firstName", void 0);
-        (0, tslib_1.__decorate)([
-            (0, decorators_1.property)()
-        ], CimisWidget.prototype, "lastName", void 0);
-        (0, tslib_1.__decorate)([
-            (0, decorators_1.property)()
-        ], CimisWidget.prototype, "emphasized", void 0);
-        (0, tslib_1.__decorate)([
-            (0, decorators_1.property)(),
-            (0, widget_1.messageBundle)("HelloWorld/assets/t9n/widget")
-        ], CimisWidget.prototype, "messages", void 0);
         CimisWidget = (0, tslib_1.__decorate)([
             (0, decorators_1.subclass)("esri.widgets.CimisWidget")
         ], CimisWidget);
