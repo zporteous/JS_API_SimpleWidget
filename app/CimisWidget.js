@@ -1,0 +1,71 @@
+define(["require", "exports", "tslib", "esri/core/accessorSupport/decorators", "esri/widgets/Widget", "esri/widgets/support/widget"], function (require, exports, tslib_1, decorators_1, Widget_1, widget_1) {
+    "use strict";
+    Widget_1 = (0, tslib_1.__importDefault)(Widget_1);
+    var CSS = {
+        base: "esri-cimis-widget",
+        emphasis: "esri-cimis-widget--emphasis"
+    };
+    var CimisWidget = /** @class */ (function (_super) {
+        (0, tslib_1.__extends)(CimisWidget, _super);
+        function CimisWidget(params) {
+            var _this = _super.call(this, params) || this;
+            //----------------------------------
+            //  firstName
+            //----------------------------------
+            _this.firstName = "John";
+            //----------------------------------
+            //  lastName
+            //----------------------------------
+            _this.lastName = "Smith";
+            //----------------------------------
+            //  emphasized
+            //----------------------------------
+            _this.emphasized = false;
+            //----------------------------------
+            //  messages
+            //----------------------------------
+            _this.messages = null;
+            return _this;
+        }
+        // Public method
+        CimisWidget.prototype.render = function () {
+            var _a;
+            // const form = this._renderForm();
+            var classes = (_a = {},
+                _a[CSS.emphasis] = this.emphasized,
+                _a);
+            return ((0, widget_1.tsx)("div", { id: "form" },
+                (0, widget_1.tsx)("form", null,
+                    (0, widget_1.tsx)("div", { class: "form-group" },
+                        (0, widget_1.tsx)("label", { for: "exampleInputEmail1" }, "Email address"),
+                        (0, widget_1.tsx)("input", { type: "email", class: "form-control", id: "exampleInputEmail1", "aria-describedby": "emailHelp", placeholder: "Enter email" }),
+                        (0, widget_1.tsx)("small", { id: "emailHelp", class: "form-text text-muted" }, "We'll never share your email with anyone else.")),
+                    (0, widget_1.tsx)("div", { class: "form-group" },
+                        (0, widget_1.tsx)("label", { for: "exampleInputPassword1" }, "Password"),
+                        (0, widget_1.tsx)("input", { type: "password", class: "form-control", id: "exampleInputPassword1", placeholder: "Password" })),
+                    (0, widget_1.tsx)("div", { class: "form-check" },
+                        (0, widget_1.tsx)("input", { type: "checkbox", class: "form-check-input", id: "exampleCheck1" }),
+                        (0, widget_1.tsx)("label", { class: "form-check-label", for: "exampleCheck1" }, "Check me out")),
+                    (0, widget_1.tsx)("button", { type: "submit", class: "btn btn-primary" }, "Submit"))));
+        };
+        (0, tslib_1.__decorate)([
+            (0, decorators_1.property)()
+        ], CimisWidget.prototype, "firstName", void 0);
+        (0, tslib_1.__decorate)([
+            (0, decorators_1.property)()
+        ], CimisWidget.prototype, "lastName", void 0);
+        (0, tslib_1.__decorate)([
+            (0, decorators_1.property)()
+        ], CimisWidget.prototype, "emphasized", void 0);
+        (0, tslib_1.__decorate)([
+            (0, decorators_1.property)(),
+            (0, widget_1.messageBundle)("HelloWorld/assets/t9n/widget")
+        ], CimisWidget.prototype, "messages", void 0);
+        CimisWidget = (0, tslib_1.__decorate)([
+            (0, decorators_1.subclass)("esri.widgets.CimisWidget")
+        ], CimisWidget);
+        return CimisWidget;
+    }(Widget_1.default));
+    return CimisWidget;
+});
+//# sourceMappingURL=CimisWidget.js.map
