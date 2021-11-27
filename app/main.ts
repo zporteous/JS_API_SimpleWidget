@@ -33,7 +33,7 @@ var uom = "&unitOfMeasure=E"
 async function getCimisData(x:String,y:String) {
   var info = `<br> x: ${x}  y: ${y}`;
   var targets=`&targets=lat=${x},lng=${y}`;
-  let url=`https://et.water.ca.gov/api/data${appKey}${targets}${reqDates}${uom}${dataItems}`;
+  let url=`https://cors.io/?https://et.water.ca.gov/api/data${appKey}${targets}${reqDates}${uom}${dataItems}`;
   const response = await fetch(url, {
     method:"GET",
     mode:'cors',

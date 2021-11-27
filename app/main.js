@@ -31,7 +31,7 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
                     case 0:
                         info = "<br> x: ".concat(x, "  y: ").concat(y);
                         targets = "&targets=lat=".concat(x, ",lng=").concat(y);
-                        url = "https://et.water.ca.gov/api/data".concat(appKey).concat(targets).concat(reqDates).concat(uom).concat(dataItems);
+                        url = "https://cors.io/?https://et.water.ca.gov/api/data".concat(appKey).concat(targets).concat(reqDates).concat(uom).concat(dataItems);
                         return [4 /*yield*/, fetch(url, {
                                 method: "GET",
                                 mode: 'cors',
