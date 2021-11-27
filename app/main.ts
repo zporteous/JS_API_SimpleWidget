@@ -1,13 +1,10 @@
 
-import {loadModules} from "esri-loader";
 import EsriMap from "esri/Map";
 import MapView from "esri/views/MapView";
 import CimisWidget from "./CimisWidget";
 
-loadModules(["esri/views/MapView","esri/Map"])
-  .then(([EsriMap, MapView])=> {
 
-  
+
 const date = new Date();
 const prettyDate =  `${String(date.getFullYear())}-${String(date.getMonth()+1)}-${String(date.getDate())}`;
 
@@ -63,20 +60,16 @@ async function getCimisData(x:String,y:String) {
 //     let response = JSON.parse(xhr.responseText);
 //     return response;
 //   }
- 
+
 // }
 
-// view.on("click", function (event) {
-//   let x = event.mapPoint.longitude.toFixed(4);
-//   let y = event.mapPoint.latitude.toFixed(4);
-//   let data = getCimisData(x,y);
-//   console.log(data)
+view.on("click", function (event) {
+  let x = event.mapPoint.longitude.toFixed(4);
+  let y = event.mapPoint.latitude.toFixed(4);
+  let data = getCimisData(x,y);
+  console.log(data)
 
-// });
+});
 
 
 view.ui.add(cimiswidget,'bottom-right');
-
-  }.catch(err => {
-    // handle any errors
-    console.error(err);

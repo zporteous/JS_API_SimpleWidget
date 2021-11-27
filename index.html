@@ -13,7 +13,7 @@
       <!-- End Bootstrap -->
 
       <!-- Custom Styles -->
-      <link rel="stylesheet" type="text/css" href="styles.css">
+      <link rel="stylesheet" type="text/css" href="./app/styles.css">
       <!-- End Custom Styles -->
 
       <!-- ArcGIS JS API -->
@@ -24,7 +24,7 @@
           packages: [
             {
               name: "app",
-              location: locationPath + "app"
+              location: locationPath + "/app"
             }
           ]
         };
@@ -41,6 +41,6 @@
       </div>
       
       
-      <script>require(["app/main"]);</script>
+      <script>require(["app/main.js"]);</script>
     </body>
   </html>

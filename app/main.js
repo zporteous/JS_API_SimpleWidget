@@ -62,12 +62,12 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
     //     return response;
     //   }
     // }
-    // view.on("click", function (event) {
-    //   let x = event.mapPoint.longitude.toFixed(4);
-    //   let y = event.mapPoint.latitude.toFixed(4);
-    //   let data = getCimisData(x,y);
-    //   console.log(data)
-    // });
+    view.on("click", function (event) {
+        var x = event.mapPoint.longitude.toFixed(4);
+        var y = event.mapPoint.latitude.toFixed(4);
+        var data = getCimisData(x, y);
+        console.log(data);
+    });
     view.ui.add(cimiswidget, 'bottom-right');
 });
 //# sourceMappingURL=main.js.map
