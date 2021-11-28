@@ -25,51 +25,21 @@ const cimiswidget = new CimisWidget({
 container: "widgetDiv"
 });
 
-var appKey="?appKey=d6eb1025-7d02-47c4-98fb-cdb1512134b2";
-var dataItems="&dataItems=day-asce-eto,day-sol-rad-avg"
-var reqDates= `&startDate=${prettyDate}&endDate=${prettyDate}`
-var uom = "&unitOfMeasure=E"
-
-async function getCimisData(x:String,y:String) {
+async function getCimisData(x:String,y:String,date:String) {
   var info = `<br> x: ${x}  y: ${y}`;
-  var targets=`&targets=lat=${x},lng=${y}`;
-  let url=`https://cors.io/?https://et.water.ca.gov/api/data${appKey}${targets}${reqDates}${uom}${dataItems}`;
-  const response = await fetch(url, {
-    method:"GET",
-    mode:'cors',
-    headers: {
-      'Content-Type': 'text/plain'
-    }
-  });
-  const string = await response.text();
-  return string;
+  let url=`http://localhost:3000/cimis?x=${x}&y=${y}&date=${date}`;
+  const res = await fetch(url)
+  return res.json();
 }
 
 
-
-// async function getCimisData(x:String,y:String) {
-//   var info = `<br> x: ${x}  y: ${y}`;
-//   var targets=`&targets=lat=${x},lng=${y}`;
-//   const xhr = new XMLHttpRequest();
-//   let url=`https://et.water.ca.gov/api/data${appKey}${targets}${reqDates}${uom}${dataItems}`;
-//   xhr.open('GET', url);
-//   xhr.setRequestHeader('Accept', "*");
-//   xhr.send();
-
-//   if (xhr.readyState === xhr.DONE) {
-//     let response = JSON.parse(xhr.responseText);
-//     return response;
-//   }
-
-// }
-
-view.on("click", function (event) {
+view.on("click", async function (event) {
   let x = event.mapPoint.longitude.toFixed(4);
   let y = event.mapPoint.latitude.toFixed(4);
-  let data = getCimisData(x,y);
+  let data = await getCimisData(x,y,prettyDate);
   console.log(data)
-
+  
 });
 
 
-view.ui.add(cimiswidget,'bottom-right');
+view.ui.add(cimiswidget,'top-left');

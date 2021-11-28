@@ -19,55 +19,39 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
     var cimiswidget = new CimisWidget_1.default({
         container: "widgetDiv"
     });
-    var appKey = "?appKey=d6eb1025-7d02-47c4-98fb-cdb1512134b2";
-    var dataItems = "&dataItems=day-asce-eto,day-sol-rad-avg";
-    var reqDates = "&startDate=".concat(prettyDate, "&endDate=").concat(prettyDate);
-    var uom = "&unitOfMeasure=E";
-    function getCimisData(x, y) {
+    function getCimisData(x, y, date) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var info, targets, url, response, string;
+            var info, url, res;
             return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         info = "<br> x: ".concat(x, "  y: ").concat(y);
-                        targets = "&targets=lat=".concat(x, ",lng=").concat(y);
-                        url = "https://cors.io/?https://et.water.ca.gov/api/data".concat(appKey).concat(targets).concat(reqDates).concat(uom).concat(dataItems);
-                        return [4 /*yield*/, fetch(url, {
-                                method: "GET",
-                                mode: 'cors',
-                                headers: {
-                                    'Content-Type': 'text/plain'
-                                }
-                            })];
+                        url = "http://localhost:3000/cimis?x=".concat(x, "&y=").concat(y, "&date=").concat(date);
+                        return [4 /*yield*/, fetch(url)];
                     case 1:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.text()];
-                    case 2:
-                        string = _a.sent();
-                        return [2 /*return*/, string];
+                        res = _a.sent();
+                        return [2 /*return*/, res.json()];
                 }
             });
         });
     }
-    // async function getCimisData(x:String,y:String) {
-    //   var info = `<br> x: ${x}  y: ${y}`;
-    //   var targets=`&targets=lat=${x},lng=${y}`;
-    //   const xhr = new XMLHttpRequest();
-    //   let url=`https://et.water.ca.gov/api/data${appKey}${targets}${reqDates}${uom}${dataItems}`;
-    //   xhr.open('GET', url);
-    //   xhr.setRequestHeader('Accept', "*");
-    //   xhr.send();
-    //   if (xhr.readyState === xhr.DONE) {
-    //     let response = JSON.parse(xhr.responseText);
-    //     return response;
-    //   }
-    // }
     view.on("click", function (event) {
-        var x = event.mapPoint.longitude.toFixed(4);
-        var y = event.mapPoint.latitude.toFixed(4);
-        var data = getCimisData(x, y);
-        console.log(data);
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+            var x, y, data;
+            return (0, tslib_1.__generator)(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        x = event.mapPoint.longitude.toFixed(4);
+                        y = event.mapPoint.latitude.toFixed(4);
+                        return [4 /*yield*/, getCimisData(x, y, prettyDate)];
+                    case 1:
+                        data = _a.sent();
+                        console.log(data);
+                        return [2 /*return*/];
+                }
+            });
+        });
     });
-    view.ui.add(cimiswidget, 'bottom-right');
+    view.ui.add(cimiswidget, 'top-left');
 });
 //# sourceMappingURL=main.js.map
