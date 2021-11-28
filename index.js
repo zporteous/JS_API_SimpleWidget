@@ -26,11 +26,8 @@ async function getCimisData(x, y, date) {
 app.get('/cimis', async (req,res) => {
   const { x, y, date } = req.query;
   console.log(`x: ${x}, y: ${y}, ${date}`);
-  let response = await getCimisData(x,y,date)
-  response.forEach((record) => {
-    console.log(record)
-    res.send(record)
-  })
+  let recordsArray = await getCimisData(x,y,date)
+  res.send(recordsArray)
 })
 
 

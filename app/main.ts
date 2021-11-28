@@ -3,8 +3,6 @@ import EsriMap from "esri/Map";
 import MapView from "esri/views/MapView";
 import CimisWidget from "./CimisWidget";
 
-
-
 const date = new Date();
 const prettyDate =  `${String(date.getFullYear())}-${String(date.getMonth()+1)}-${String(date.getDate())}`;
 
@@ -19,9 +17,11 @@ const view = new MapView({
   zoom: 12
 });
 
-const apiResult = document.getElementById("apiResult")
+const apiResult1 = document.getElementById("DayAsceEto")
+const apiResult2 = document.getElementById("DaySolRadAvg")
 
 const cimiswidget = new CimisWidget({
+  
 container: "widgetDiv"
 });
 
@@ -36,9 +36,13 @@ async function getCimisData(x:String,y:String,date:String) {
 view.on("click", async function (event) {
   let x = event.mapPoint.longitude.toFixed(4);
   let y = event.mapPoint.latitude.toFixed(4);
-  let data = await getCimisData(x,y,prettyDate);
-  console.log(data)
-  
+  cimiswidget.Status = "Fetching...";
+  let records = await getCimisData(x,y,prettyDate);
+  console.log(records)
+  cimiswidget.Asce = `${records[0].Records[0].DayAsceEto.Value}`;
+  cimiswidget.Rad = `${records[0].Records[0].DaySolRadAvg.Value}`;
+  cimiswidget.Status = "Completed.";
+ 
 });
 
 

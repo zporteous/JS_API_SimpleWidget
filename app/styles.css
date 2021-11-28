@@ -14,3 +14,11 @@ body,
 #btnSpace {
     padding: 10px;
 }
+
+.widgetDiv {
+    color:"red";
+}
+
+.esri-cimis-widget {
+    color:"red";
+}

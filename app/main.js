@@ -15,7 +15,8 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
         center: [-118.244, 34.052],
         zoom: 12
     });
-    var apiResult = document.getElementById("apiResult");
+    var apiResult1 = document.getElementById("DayAsceEto");
+    var apiResult2 = document.getElementById("DaySolRadAvg");
     var cimiswidget = new CimisWidget_1.default({
         container: "widgetDiv"
     });
@@ -37,16 +38,20 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
     }
     view.on("click", function (event) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var x, y, data;
+            var x, y, records;
             return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         x = event.mapPoint.longitude.toFixed(4);
                         y = event.mapPoint.latitude.toFixed(4);
+                        cimiswidget.Status = "Fetching...";
                         return [4 /*yield*/, getCimisData(x, y, prettyDate)];
                     case 1:
-                        data = _a.sent();
-                        console.log(data);
+                        records = _a.sent();
+                        console.log(records);
+                        cimiswidget.Asce = "".concat(records[0].Records[0].DayAsceEto.Value);
+                        cimiswidget.Rad = "".concat(records[0].Records[0].DaySolRadAvg.Value);
+                        cimiswidget.Status = "Completed.";
                         return [2 /*return*/];
                 }
             });
