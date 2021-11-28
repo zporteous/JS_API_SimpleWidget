@@ -38,7 +38,6 @@ view.on("click", async function (event) {
   let y = event.mapPoint.latitude.toFixed(4);
   cimiswidget.Status = "Fetching...";
   let records = await getCimisData(x,y,prettyDate);
-  console.log(records)
   cimiswidget.Asce = `${records[0].Records[0].DayAsceEto.Value}`;
   cimiswidget.Rad = `${records[0].Records[0].DaySolRadAvg.Value}`;
   cimiswidget.Status = "Completed.";

@@ -48,7 +48,6 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
                         return [4 /*yield*/, getCimisData(x, y, prettyDate)];
                     case 1:
                         records = _a.sent();
-                        console.log(records);
                         cimiswidget.Asce = "".concat(records[0].Records[0].DayAsceEto.Value);
                         cimiswidget.Rad = "".concat(records[0].Records[0].DaySolRadAvg.Value);
                         cimiswidget.Status = "Completed.";

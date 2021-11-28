@@ -15,21 +15,25 @@ define(["require", "exports", "tslib", "esri/core/accessorSupport/decorators", "
             _this.Asce = "No data...";
             _this.Rad = "No data...";
             _this.Status = "Tool is idle";
+            _this.TodayDT = new Date();
+            _this.TodayPretty = _this.TodayDT.getFullYear() + '-' + (_this.TodayDT.getMonth() + 1) + '-' + _this.TodayDT.getDate();
             return _this;
         }
         // Public method
         CimisWidget.prototype.render = function () {
             return ((0, widget_1.tsx)("div", null,
                 (0, widget_1.tsx)("h4", null, " CIMIS Spatial API "),
-                (0, widget_1.tsx)("h6", null,
+                (0, widget_1.tsx)("p", null,
                     " Click anywhere on the map",
                     (0, widget_1.tsx)("br", null),
                     "to get readings "),
+                (0, widget_1.tsx)("label", { for: "start" }, "Start date: "),
+                (0, widget_1.tsx)("input", { type: "date", id: "start", name: "trip-start", value: this.TodayPretty, max: this.TodayPretty }),
                 (0, widget_1.tsx)("table", { class: "table" },
                     (0, widget_1.tsx)("thead", null,
                         (0, widget_1.tsx)("tr", null,
                             (0, widget_1.tsx)("th", { scope: "col" }, "Evapotranspiraton (in) "),
-                            (0, widget_1.tsx)("th", { scope: "col" }, "Average Solar Radation (Ly/day)"))),
+                            (0, widget_1.tsx)("th", { scope: "col" }, "Average Solar Radiation (Ly/day)"))),
                     (0, widget_1.tsx)("tbody", null,
                         (0, widget_1.tsx)("tr", null,
                             (0, widget_1.tsx)("td", { scope: "row" }, this.Asce),
@@ -47,6 +51,12 @@ define(["require", "exports", "tslib", "esri/core/accessorSupport/decorators", "
         (0, tslib_1.__decorate)([
             (0, decorators_1.property)()
         ], CimisWidget.prototype, "Status", void 0);
+        (0, tslib_1.__decorate)([
+            (0, decorators_1.property)()
+        ], CimisWidget.prototype, "TodayDT", void 0);
+        (0, tslib_1.__decorate)([
+            (0, decorators_1.property)()
+        ], CimisWidget.prototype, "render", null);
         CimisWidget = (0, tslib_1.__decorate)([
             (0, decorators_1.subclass)("esri.widgets.CimisWidget")
         ], CimisWidget);
