@@ -42,9 +42,9 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
             return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        cimiswidget.Status = "Fetching...";
                         x = event.mapPoint.longitude.toFixed(4);
                         y = event.mapPoint.latitude.toFixed(4);
-                        cimiswidget.Status = "Fetching...";
                         return [4 /*yield*/, getCimisData(x, y, prettyDate)];
                     case 1:
                         records = _a.sent();

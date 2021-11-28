@@ -34,14 +34,13 @@ async function getCimisData(x:String,y:String,date:String) {
 
 
 view.on("click", async function (event) {
+  cimiswidget.Status = "Fetching...";
   let x = event.mapPoint.longitude.toFixed(4);
   let y = event.mapPoint.latitude.toFixed(4);
-  cimiswidget.Status = "Fetching...";
   let records = await getCimisData(x,y,prettyDate);
   cimiswidget.Asce = `${records[0].Records[0].DayAsceEto.Value}`;
   cimiswidget.Rad = `${records[0].Records[0].DaySolRadAvg.Value}`;
   cimiswidget.Status = "Completed.";
- 
 });
 
 

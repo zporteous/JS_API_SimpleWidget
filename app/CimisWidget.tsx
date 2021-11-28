@@ -4,8 +4,7 @@ import Widget from "esri/widgets/Widget";
 import { tsx, messageBundle } from "esri/widgets/support/widget";
 
 const CSS = {
-  base: "esri-cimis-widget",
-  emphasis: "esri-cimis-widget--emphasis"
+  base: "cimis-widget",
 };
 
 @subclass("esri.widgets.CimisWidget")
@@ -38,7 +37,7 @@ render() {
     <div>
       <h4> CIMIS Spatial API </h4>
       <p> Click anywhere on the map<br></br>to get readings </p>
-      <label for="start">Start date: </label>
+      <label for="start"><strong>Choose a day..</strong> </label><br></br>
       <input type="date" id="start" name="trip-start"
        value={this.TodayPretty}
        max={this.TodayPretty}></input>

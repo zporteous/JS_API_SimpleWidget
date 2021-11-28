@@ -2,8 +2,7 @@ define(["require", "exports", "tslib", "esri/core/accessorSupport/decorators", "
     "use strict";
     Widget_1 = (0, tslib_1.__importDefault)(Widget_1);
     var CSS = {
-        base: "esri-cimis-widget",
-        emphasis: "esri-cimis-widget--emphasis"
+        base: "cimis-widget",
     };
     var CimisWidget = /** @class */ (function (_super) {
         (0, tslib_1.__extends)(CimisWidget, _super);
@@ -27,7 +26,10 @@ define(["require", "exports", "tslib", "esri/core/accessorSupport/decorators", "
                     " Click anywhere on the map",
                     (0, widget_1.tsx)("br", null),
                     "to get readings "),
-                (0, widget_1.tsx)("label", { for: "start" }, "Start date: "),
+                (0, widget_1.tsx)("label", { for: "start" },
+                    (0, widget_1.tsx)("strong", null, "Choose a day.."),
+                    " "),
+                (0, widget_1.tsx)("br", null),
                 (0, widget_1.tsx)("input", { type: "date", id: "start", name: "trip-start", value: this.TodayPretty, max: this.TodayPretty }),
                 (0, widget_1.tsx)("table", { class: "table" },
                     (0, widget_1.tsx)("thead", null,
