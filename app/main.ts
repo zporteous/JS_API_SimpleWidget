@@ -26,7 +26,7 @@ container: "widgetDiv"
 
 async function getCimisData(x:String,y:String,sd:String,ed:String) {
   console.log(`fetching x: ${x}, y: ${y}, sd: ${sd}, ed: ${ed}`)
-  let url=`http://127.0.0.1:4000/cimis?x=${x}&y=${y}&sd=${sd}&ed=${ed}`;
+  let url=`http://127.0.0.1:3000/cimis?x=${x}&y=${y}&sd=${sd}&ed=${ed}`;
   cimiswidget.Status = "Fetching...";
   try {
     var res = await fetch(url)

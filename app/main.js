@@ -28,7 +28,7 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
                 switch (_a.label) {
                     case 0:
                         console.log("fetching x: ".concat(x, ", y: ").concat(y, ", sd: ").concat(sd, ", ed: ").concat(ed));
-                        url = "http://localhost:3000/cimis?x=".concat(x, "&y=").concat(y, "&sd=").concat(sd, "&ed=").concat(ed);
+                        url = "http://127.0.0.1:3000/cimis?x=".concat(x, "&y=").concat(y, "&sd=").concat(sd, "&ed=").concat(ed);
                         cimiswidget.Status = "Fetching...";
                         _a.label = 1;
                     case 1:
