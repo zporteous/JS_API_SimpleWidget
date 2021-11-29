@@ -99,26 +99,26 @@ render() {
   return (
     <div class={CSS.base}>
       <h4> CIMIS Spatial API </h4>
-      <ol>
-        <li><p> Choose a week long data range </p></li>
-        <li><p> Click anywhere on the map<br></br>to get readings </p></li>
-      </ol>
-      <label for="start"><strong>Start Date</strong> </label><br/>
+      <ul>
+        <li><p> This simple application retrieves data<br/> for the last week from CIMIS </p></li>
+        <p> Click anywhere on the map<br></br>to get readings... </p>
+      </ul>
+      {/* <label for="start"><strong>Start Date</strong> </label><br/>
       <input 
         type="date" 
         id="sd" 
         name="Start Date" 
         onchange={this._sDateHandler}
         value={this.TodayPretty}
-        ></input><br/><br/>
-      <label for="end"><strong>End Date</strong> </label><br/>
+        ></input><br/><br/> */}
+      {/* <label for="end"><strong>End Date</strong> </label><br/>
       <input 
         type="date" 
         id="ed" 
         name="End Date" 
         onchange={this._eDateHandler}
         value={this.TodayPretty}
-      ></input><br/>
+      ></input><br/> */}
       <table class="table">
         <thead>
           <tr>

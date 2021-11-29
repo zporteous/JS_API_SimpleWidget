@@ -5,7 +5,10 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
     MapView_1 = (0, tslib_1.__importDefault)(MapView_1);
     CimisWidget_1 = (0, tslib_1.__importDefault)(CimisWidget_1);
     var date = new Date();
-    var prettyDate = "".concat(String(date.getFullYear()), "-").concat(String(date.getMonth() + 1), "-").concat(String(date.getDate()));
+    var weekAgo = new Date();
+    weekAgo.setDate(date.getDate() - 6);
+    var currentDate = "".concat(String(date.getFullYear()), "-").concat(String(date.getMonth() + 1), "-").concat(String(date.getDate()));
+    var aWeekAgo = "".concat(String(weekAgo.getFullYear()), "-").concat(String(weekAgo.getMonth() + 1), "-").concat(String(weekAgo.getDate()));
     var map = new Map_1.default({
         basemap: "streets-vector"
     });
@@ -53,7 +56,7 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
                         console.log(cimiswidget.sd);
                         x = event.mapPoint.longitude.toFixed(4);
                         y = event.mapPoint.latitude.toFixed(4);
-                        return [4 /*yield*/, getCimisData(x, y, cimiswidget.sd, cimiswidget.ed)];
+                        return [4 /*yield*/, getCimisData(x, y, aWeekAgo, currentDate)];
                     case 1:
                         records = _a.sent();
                         if (records.length > 0) {

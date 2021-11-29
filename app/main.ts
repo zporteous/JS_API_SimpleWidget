@@ -4,7 +4,10 @@ import MapView from "esri/views/MapView";
 import CimisWidget from "./CimisWidget";
 
 const date = new Date();
-const prettyDate =  `${String(date.getFullYear())}-${String(date.getMonth()+1)}-${String(date.getDate())}`;
+const weekAgo = new Date();
+weekAgo.setDate(date.getDate() - 6);
+const currentDate =  `${String(date.getFullYear())}-${String(date.getMonth()+1)}-${String(date.getDate())}`;
+const aWeekAgo = `${String(weekAgo.getFullYear())}-${String(weekAgo.getMonth()+1)}-${String(weekAgo.getDate())}`;
 
 const map = new EsriMap({
   basemap: "streets-vector"
@@ -38,7 +41,7 @@ view.on("click", async function (event) {
   console.log(cimiswidget.sd)
   let x = event.mapPoint.longitude.toFixed(4);
   let y = event.mapPoint.latitude.toFixed(4);
-  let records = await getCimisData(x,y,cimiswidget.sd, cimiswidget.ed);
+  let records = await getCimisData(x,y,aWeekAgo, currentDate);
   if (records.length > 0 ) {
     console.log(records[0])
     cimiswidget.Data = records[0].Records;
