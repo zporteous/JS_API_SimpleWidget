@@ -5,7 +5,10 @@ import CimisWidget from "./CimisWidget";
 
 const date = new Date();
 const weekAgo = new Date();
+
 weekAgo.setDate(date.getDate() - 6);
+date.setDate(date.getDate() - 1)
+
 const currentDate =  `${String(date.getFullYear())}-${String(date.getMonth()+1)}-${String(date.getDate())}`;
 const aWeekAgo = `${String(weekAgo.getFullYear())}-${String(weekAgo.getMonth()+1)}-${String(weekAgo.getDate())}`;
 

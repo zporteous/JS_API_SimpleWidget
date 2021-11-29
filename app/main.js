@@ -7,6 +7,7 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
     var date = new Date();
     var weekAgo = new Date();
     weekAgo.setDate(date.getDate() - 6);
+    date.setDate(date.getDate() - 1);
     var currentDate = "".concat(String(date.getFullYear()), "-").concat(String(date.getMonth() + 1), "-").concat(String(date.getDate()));
     var aWeekAgo = "".concat(String(weekAgo.getFullYear()), "-").concat(String(weekAgo.getMonth() + 1), "-").concat(String(weekAgo.getDate()));
     var map = new Map_1.default({
