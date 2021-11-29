@@ -11,22 +11,22 @@ app.use(cors());
 app.use(express.static('./'))
 app.use(express.json());
 
-async function getCimisData(x, y, date) {
+async function getCimisData(x, y, sd, ed) {
   let cimisUrl=`https://et.water.ca.gov/api/data`
   let res = await axios.get(cimisUrl,{ params: {
     appKey: process.env.APPKEY, 
     targets: `lat=${y},lng=${x}`,
-    startDate: `${date}`,
-    endDate: `${date}`,
+    startDate: `${sd}`,
+    endDate: `${ed}`,
     dataItems: 'day-asce-eto,day-sol-rad-avg'
   }});
   return res.data.Data.Providers;
 }
 
 app.get('/cimis', async (req,res) => {
-  const { x, y, date } = req.query;
-  console.log(`x: ${x}, y: ${y}, ${date}`);
-  let recordsArray = await getCimisData(x,y,date)
+  const { x, y, sd, ed } = req.query;
+  console.log(`x: ${x}, y: ${y}, ${sd}, ${ed}`);
+  let recordsArray = await getCimisData(x,y,sd,ed)
   res.send(recordsArray)
 })
 

@@ -20,5 +20,9 @@ body,
 }
 
 .cimis-widget {
-    color:"red";
+    padding: 1em;
+}
+
+.table {
+    font-size: 11px;
 }

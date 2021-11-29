@@ -17,31 +17,38 @@ const view = new MapView({
   zoom: 12
 });
 
-const apiResult1 = document.getElementById("DayAsceEto")
-const apiResult2 = document.getElementById("DaySolRadAvg")
-
 const cimiswidget = new CimisWidget({
-  
 container: "widgetDiv"
 });
 
-async function getCimisData(x:String,y:String,date:String) {
-  var info = `<br> x: ${x}  y: ${y}`;
-  let url=`http://localhost:3000/cimis?x=${x}&y=${y}&date=${date}`;
-  const res = await fetch(url)
-  return res.json();
+async function getCimisData(x:String,y:String,sd:String,ed:String) {
+  console.log(`fetching x: ${x}, y: ${y}, sd: ${sd}, ed: ${ed}`)
+  let url=`http://localhost:3000/cimis?x=${x}&y=${y}&sd=${sd}&ed=${ed}`;
+  cimiswidget.Status = "Fetching...";
+  try {
+    var res = await fetch(url)
+  } catch(e) {
+    console.log(e)
+  } finally {
+    return res.json();
+  }
 }
 
-
 view.on("click", async function (event) {
-  cimiswidget.Status = "Fetching...";
+  console.log(cimiswidget.sd)
   let x = event.mapPoint.longitude.toFixed(4);
   let y = event.mapPoint.latitude.toFixed(4);
-  let records = await getCimisData(x,y,prettyDate);
-  cimiswidget.Asce = `${records[0].Records[0].DayAsceEto.Value}`;
-  cimiswidget.Rad = `${records[0].Records[0].DaySolRadAvg.Value}`;
-  cimiswidget.Status = "Completed.";
+  let records = await getCimisData(x,y,cimiswidget.sd, cimiswidget.ed);
+  if (records.length > 0 ) {
+    console.log(records[0])
+    cimiswidget.Data = records[0].Records;
+    cimiswidget.Status = "Completed.";
+  } else {
+    cimiswidget.Status = "Error Occured or no data";
+  } 
 });
 
 
 view.ui.add(cimiswidget,'top-left');
+
+(window as any).cimiswidget = cimiswidget;

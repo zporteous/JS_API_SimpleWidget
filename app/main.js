@@ -15,23 +15,31 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
         center: [-118.244, 34.052],
         zoom: 12
     });
-    var apiResult1 = document.getElementById("DayAsceEto");
-    var apiResult2 = document.getElementById("DaySolRadAvg");
     var cimiswidget = new CimisWidget_1.default({
         container: "widgetDiv"
     });
-    function getCimisData(x, y, date) {
+    function getCimisData(x, y, sd, ed) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var info, url, res;
+            var url, res, e_1;
             return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        info = "<br> x: ".concat(x, "  y: ").concat(y);
-                        url = "http://localhost:3000/cimis?x=".concat(x, "&y=").concat(y, "&date=").concat(date);
-                        return [4 /*yield*/, fetch(url)];
+                        console.log("fetching x: ".concat(x, ", y: ").concat(y, ", sd: ").concat(sd, ", ed: ").concat(ed));
+                        url = "http://localhost:3000/cimis?x=".concat(x, "&y=").concat(y, "&sd=").concat(sd, "&ed=").concat(ed);
+                        cimiswidget.Status = "Fetching...";
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, 4, 5]);
+                        return [4 /*yield*/, fetch(url)];
+                    case 2:
                         res = _a.sent();
-                        return [2 /*return*/, res.json()];
+                        return [3 /*break*/, 5];
+                    case 3:
+                        e_1 = _a.sent();
+                        console.log(e_1);
+                        return [3 /*break*/, 5];
+                    case 4: return [2 /*return*/, res.json()];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
@@ -42,20 +50,26 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
             return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        cimiswidget.Status = "Fetching...";
+                        console.log(cimiswidget.sd);
                         x = event.mapPoint.longitude.toFixed(4);
                         y = event.mapPoint.latitude.toFixed(4);
-                        return [4 /*yield*/, getCimisData(x, y, prettyDate)];
+                        return [4 /*yield*/, getCimisData(x, y, cimiswidget.sd, cimiswidget.ed)];
                     case 1:
                         records = _a.sent();
-                        cimiswidget.Asce = "".concat(records[0].Records[0].DayAsceEto.Value);
-                        cimiswidget.Rad = "".concat(records[0].Records[0].DaySolRadAvg.Value);
-                        cimiswidget.Status = "Completed.";
+                        if (records.length > 0) {
+                            console.log(records[0]);
+                            cimiswidget.Data = records[0].Records;
+                            cimiswidget.Status = "Completed.";
+                        }
+                        else {
+                            cimiswidget.Status = "Error Occured or no data";
+                        }
                         return [2 /*return*/];
                 }
             });
         });
     });
     view.ui.add(cimiswidget, 'top-left');
+    window.cimiswidget = cimiswidget;
 });
 //# sourceMappingURL=main.js.map
