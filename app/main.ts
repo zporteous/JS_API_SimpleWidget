@@ -3,6 +3,7 @@ import EsriMap from "esri/Map";
 import MapView from "esri/views/MapView";
 import CimisWidget from "./CimisWidget";
 
+
 const date = new Date();
 const weekAgo = new Date();
 
@@ -53,7 +54,6 @@ view.on("click", async function (event) {
     cimiswidget.Status = "Error Occured or no data";
   } 
 });
-
 
 view.ui.add(cimiswidget,'top-left');
 
