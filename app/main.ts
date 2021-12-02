@@ -29,30 +29,34 @@ container: "widgetDiv"
 });
 
 async function getCimisData(x:String,y:String,sd:String,ed:String) {
-  console.log(`fetching x: ${x}, y: ${y}, sd: ${sd}, ed: ${ed}`)
+  // console.log(`fetching x: ${x}, y: ${y}, sd: ${sd}, ed: ${ed}`)
   let url=`http://127.0.0.1:3000/cimis?x=${x}&y=${y}&sd=${sd}&ed=${ed}`;
   cimiswidget.Status = "Fetching...";
   try {
     var res = await fetch(url)
+    return res.json();
   } catch(e) {
     console.log(e)
-  } finally {
-    return res.json();
-  }
+    cimiswidget.Status = "Error Occured or no data";
+    return e.message
+  } 
 }
 
 view.on("click", async function (event) {
   console.log(cimiswidget.sd)
   let x = event.mapPoint.longitude.toFixed(4);
   let y = event.mapPoint.latitude.toFixed(4);
-  let records = await getCimisData(x,y,aWeekAgo, currentDate);
-  if (records.length > 0 ) {
-    console.log(records[0])
-    cimiswidget.Data = records[0].Records;
-    cimiswidget.Status = "Completed.";
-  } else {
-    cimiswidget.Status = "Error Occured or no data";
-  } 
+  
+  try {
+    let records = await getCimisData(x,y,aWeekAgo, currentDate);
+    if (typeof records != "string" && records.length > 0) {
+      cimiswidget.Data = records[0].Records;
+      cimiswidget.Status = "Completed.";
+    } 
+  } catch(e) {
+    console.log(e.message)
+    cimiswidget.Status = "Error Occured, point may be out of CA";
+  }
 });
 
 view.ui.add(cimiswidget,'top-left');

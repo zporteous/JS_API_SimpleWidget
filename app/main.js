@@ -28,47 +28,51 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/MapView", "./Cimi
             return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("fetching x: ".concat(x, ", y: ").concat(y, ", sd: ").concat(sd, ", ed: ").concat(ed));
                         url = "http://127.0.0.1:3000/cimis?x=".concat(x, "&y=").concat(y, "&sd=").concat(sd, "&ed=").concat(ed);
                         cimiswidget.Status = "Fetching...";
                         _a.label = 1;
                     case 1:
-                        _a.trys.push([1, 3, 4, 5]);
+                        _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, fetch(url)];
                     case 2:
                         res = _a.sent();
-                        return [3 /*break*/, 5];
+                        return [2 /*return*/, res.json()];
                     case 3:
                         e_1 = _a.sent();
                         console.log(e_1);
-                        return [3 /*break*/, 5];
-                    case 4: return [2 /*return*/, res.json()];
-                    case 5: return [2 /*return*/];
+                        cimiswidget.Status = "Error Occured or no data";
+                        return [2 /*return*/, e_1.message];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     }
     view.on("click", function (event) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var x, y, records;
+            var x, y, records, e_2;
             return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         console.log(cimiswidget.sd);
                         x = event.mapPoint.longitude.toFixed(4);
                         y = event.mapPoint.latitude.toFixed(4);
-                        return [4 /*yield*/, getCimisData(x, y, aWeekAgo, currentDate)];
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, getCimisData(x, y, aWeekAgo, currentDate)];
+                    case 2:
                         records = _a.sent();
-                        if (records.length > 0) {
-                            console.log(records[0]);
+                        if (typeof records != "string" && records.length > 0) {
                             cimiswidget.Data = records[0].Records;
                             cimiswidget.Status = "Completed.";
                         }
-                        else {
-                            cimiswidget.Status = "Error Occured or no data";
-                        }
-                        return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_2 = _a.sent();
+                        console.log(e_2.message);
+                        cimiswidget.Status = "Error Occured, point may be out of CA";
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
